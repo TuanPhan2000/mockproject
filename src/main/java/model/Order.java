@@ -51,6 +51,13 @@ public class Order {
         this.address = address;
     }
 
+    public Order(int orderId, String name, String phoneNumber, String detailAddress) {
+        this.orderId = orderId;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.detailAddress = detailAddress;
+    }
+
     public int getOrderId() {
         return orderId;
     }

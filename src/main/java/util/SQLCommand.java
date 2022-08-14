@@ -1,8 +1,5 @@
 package util;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class SQLCommand {
 
@@ -36,6 +33,8 @@ public class SQLCommand {
 
     public static final String removeDiscountSQL = "DELETE FROM discount WHERE discount_id = ?";
 
+    public static final String selectDiscountByIdSQL = "SELECT * FROM discount WHERE discount_id = ?";
+
     //Address
     public static final String findAddressByPostalCode = "SELECT * FROM address WHERE postal_code = ?";
 
@@ -54,7 +53,7 @@ public class SQLCommand {
 
     public static final String insertCustomerSQL = "INSERT INTO customer(full_name, email, phone_number, address_id) VALUES(?,?,?,?)" ;
     public static final String updateCustomerSQL = "UPDATE customer SET full_name = ?, email = ?, phone_number = ?, address_id = ? WHERE customer_id = ?";
-
+    public static final String selectCustomerByIdSQL = "SELECT * FROM customer WHERE customer_id = ?";
 
     public static final String getAllCustomerSQL = "SELECT * FROM customer";
 
@@ -68,9 +67,14 @@ public class SQLCommand {
 
     public static final String insertOrderNoDiscountSQL = "INSERT INTO mockproject.order(name, phone_number, detail_address, total, order_date, customer_id, address_id) VALUES(?,?,?,?,?,?,?)";
 
+    public static final String getAllOrderSQL = "SELECT * FROM mockproject.order";
+
+    public static final String updateOrderSQL = "UPDATE mockproject.order SET name = ?, phone_number = ?, detail_address = ? WHERE order_id = ?";
     //OrderDetail
 
     public static final String insertOrderDetailSQL = "INSERT INTO mockproject.order_detail(quantity, total, order_id, product_id) VALUES(?,?,?,?)";
+    public static final String removeOrderDetailByOrderIdSQL = "DELETE FROM mockproject.order_detail WHERE order_id = ?";
 
 
+    public static final String removeOrderById = "DELETE FROM mockproject.order WHERE order_id = ?";
 }

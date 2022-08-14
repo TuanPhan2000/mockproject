@@ -6,4 +6,5 @@ public interface OrderDetailService {
 
     boolean saveOrderDetail(OrderDetail orderDetail);
 
+    boolean removeOrderDetailByOrderId(int inputRemoveOrder);
 }

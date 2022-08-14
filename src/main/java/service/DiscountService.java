@@ -12,4 +12,6 @@ public interface DiscountService {
     int updateDiscount(Discount inputUpdateDiscount);
 
     boolean removeDiscount(int inputRemoveDiscount);
+
+    Discount findDiscountById(int discountId);
 }

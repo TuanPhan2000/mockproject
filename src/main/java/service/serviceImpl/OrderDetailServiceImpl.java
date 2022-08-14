@@ -13,4 +13,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
         return orderDetailDAO.saveOrderDetail(orderDetail);
     }
+
+    @Override
+    public boolean removeOrderDetailByOrderId(int inputRemoveOrder) {
+        return orderDetailDAO.removeOrderDetailByOrderId(inputRemoveOrder);
+    }
 }

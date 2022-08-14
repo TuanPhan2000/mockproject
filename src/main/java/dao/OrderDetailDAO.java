@@ -31,4 +31,20 @@ public class OrderDetailDAO {
 
         return false;
     }
+
+    public boolean removeOrderDetailByOrderId(int inputRemoveOrder) {
+
+        try (Connection connection = DbUtil.getInstance().getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.removeOrderDetailByOrderIdSQL);
+            preparedStatement.setInt(1, inputRemoveOrder);
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

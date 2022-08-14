@@ -80,9 +80,7 @@ public class DiscountDAO {
 
             return preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -103,5 +101,27 @@ public class DiscountDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Discount findDiscountById(int discountId) {
+
+        try(Connection connection = DbUtil.getInstance().getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.selectDiscountByIdSQL);
+            preparedStatement.setInt(1, discountId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return new Discount(resultSet.getInt(1), resultSet.getString(2),
+                        resultSet.getInt(3), resultSet.getDouble(4),
+                        resultSet.getDate(5).toLocalDate(), resultSet.getDate(6).toLocalDate());
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return new Discount();
+
     }
 }

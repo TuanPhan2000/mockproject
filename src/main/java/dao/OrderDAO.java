@@ -9,6 +9,7 @@ import util.SQLCommand;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -65,4 +66,67 @@ public class OrderDAO {
         return 0;
     }
 
+    public List<Order> getAllOrders() {
+
+        List<Order> list = new ArrayList<>();
+
+        try(Connection connection = DbUtil.getInstance().getConnection()) {
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SQLCommand.getAllOrderSQL);
+            while(resultSet.next()){
+                list.add(new Order(resultSet.getInt(1), resultSet.getString(2),
+                        resultSet.getString(3), resultSet.getString(4),
+                        resultSet.getDouble(5), resultSet.getDate(6).toLocalDate(),
+                        Constain.customerService.findCustomerById(resultSet.getInt(7)),
+                        Constain.addressService.findAddressById(resultSet.getInt(8)),
+                        Constain.discountService.findDiscountById(resultSet.getInt(9))));
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+
+    }
+
+    public boolean removeOrder(int inputRemoveOrder) {
+
+        try(Connection connection = DbUtil.getInstance().getConnection()) {
+
+            if(Constain.orderDetailService.removeOrderDetailByOrderId(inputRemoveOrder)){
+                PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.removeOrderById);
+                preparedStatement.setInt(1,inputRemoveOrder);
+                preparedStatement.executeUpdate();
+                return true;
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
+    public boolean updateOrder(Order inputUpdateOrder) {
+
+        try(Connection connection = DbUtil.getInstance().getConnection()) {
+
+          PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.updateOrderSQL);
+          preparedStatement.setString(1, inputUpdateOrder.getName());
+          preparedStatement.setString(2, inputUpdateOrder.getPhoneNumber());
+          preparedStatement.setString(3, inputUpdateOrder.getDetailAddress());
+          preparedStatement.setInt(4, inputUpdateOrder.getOrderId());
+          preparedStatement.executeUpdate();
+
+          return true;
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

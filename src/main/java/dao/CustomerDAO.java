@@ -119,4 +119,21 @@ public class CustomerDAO {
 
     }
 
+    public Customer findCustomerById(int customerId) {
+
+        try (Connection connection = DbUtil.getInstance().getConnection()){
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.selectCustomerByIdSQL);
+            preparedStatement.setInt(1, customerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return new Customer(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
+                    resultSet.getString(4), Constain.addressService.findAddressById(resultSet.getInt(5)));
+
+        }catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new Customer();
+    }
 }

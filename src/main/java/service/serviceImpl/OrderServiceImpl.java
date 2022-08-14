@@ -5,6 +5,7 @@ import model.Order;
 import service.OrderService;
 import util.Constain;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class OrderServiceImpl implements OrderService {
@@ -24,5 +25,20 @@ public class OrderServiceImpl implements OrderService {
         else {
             return orderDAO.addOrder(inputAddOrder);
         }
+    }
+
+    @Override
+    public List<Order> getAllOrders() {
+        return orderDAO.getAllOrders();
+    }
+
+    @Override
+    public boolean removeOrder(int inputRemoveOrder) {
+        return orderDAO.removeOrder(inputRemoveOrder);
+    }
+
+    @Override
+    public boolean updateOrder(Order inputUpdateOrder) {
+        return orderDAO.updateOrder(inputUpdateOrder);
     }
 }

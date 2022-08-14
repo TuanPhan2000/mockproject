@@ -29,4 +29,9 @@ public class DiscountServiceImpl implements DiscountService {
     public boolean removeDiscount(int inputRemoveDiscount) {
         return discountDAO.removeDiscount(inputRemoveDiscount);
     }
+
+    @Override
+    public Discount findDiscountById(int discountId) {
+        return discountDAO.findDiscountById(discountId);
+    }
 }

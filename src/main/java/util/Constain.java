@@ -550,4 +550,31 @@ public class Constain {
         }
         return new Order(name, phoneNumber, detailAddress, total, LocalDate.now(), customer, address);
     }
+
+    public static Order inputUpdateOrder(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập id đơn hàng cần chỉnh sửa: ");
+        int orderId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Nhập tên: ");
+        String name = scanner.nextLine();
+        System.out.println("Nhập số điện thoại: ");
+        String phoneNumber = null;
+        while (!Validator.validatePhoneNumber((phoneNumber = scanner.nextLine()))){
+            System.out.println("Nhập lại số điện thoại, sai định dạng");
+        }
+        System.out.println("Nhập chi tiết số nhà/thôn: ");
+        String detailAddress = scanner.nextLine();
+
+        return new Order(orderId, name, phoneNumber, detailAddress);
+    }
+
+    public static int inputRemoveOrder() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập id đơn hàng cần xóa: ");
+        int orderId = scanner.nextInt();
+        scanner.nextLine();
+        return orderId;
+    }
 }

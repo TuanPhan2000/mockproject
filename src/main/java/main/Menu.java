@@ -1,10 +1,7 @@
 package main;
 
 import controller.*;
-import model.Address;
-import model.Customer;
-import model.Discount;
-import model.Product;
+import model.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -218,6 +215,42 @@ public class Menu {
                     }
                     if(check == 0){
                         System.out.println("Mua hàng thất bại");
+                    }
+                    break;
+
+                case 6:
+                    List<Order> listOrder = orderController.getAllOrders();
+                    System.out.println("---------------------------");
+                    System.out.println("Nhập lựa chọn: ");
+                    System.out.println("1: Xem đơn hàng");
+                    System.out.println("2: Cập nhật đơn hàng");
+                    System.out.println("3: Xóa đơn hàng");
+                    switch (scanner.nextInt()){
+                        case 1:
+                            System.out.println("Danh sách các đơn hàng: ");
+                            for (Order order : listOrder){
+                                System.out.println(order);
+                            }
+                            break;
+                        case 2:
+                            System.out.println("Danh sách các đơn hàng: ");
+                            for (Order order : listOrder){
+                                System.out.println(order);
+                            }
+                            if(orderController.updateOrder()){
+                                System.out.println("Cập nhật thành công");
+                            } else System.out.println("Cập nhật thất bại");
+                            break;
+                        case 3:
+                            System.out.println("Danh sách các đơn hàng: ");
+                            for (Order order : listOrder){
+                                System.out.println(order);
+                            }
+                            if( orderController.removeOrder()){
+                                System.out.println("Xoá thành công");
+                            } else System.out.println("Xóa thất bại");
+                            break;
+
                     }
                     break;
             }

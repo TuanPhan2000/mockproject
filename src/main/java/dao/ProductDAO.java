@@ -74,7 +74,9 @@ public class ProductDAO {
             preparedStatement.setInt(6, inputUpdateProduct.getProductId());
             preparedStatement.executeUpdate();
 
-            Constain.productService.updateStatus1();
+            if(inputUpdateProduct.getStock() != 0) {
+                Constain.productService.updateStatus1();
+            }
 
             return 1;
 

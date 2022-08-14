@@ -15,4 +15,6 @@ public interface CustomerService {
 
     int updateAddressIdIsNull(int inputAddressId);
 
+    Customer findCustomerById(int customerId);
+
 }

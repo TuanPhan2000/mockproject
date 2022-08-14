@@ -33,4 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
     public int updateAddressIdIsNull(int inputAddressId) {
         return customerDAO.updateAddressIdIsNull(inputAddressId);
     }
+
+    @Override
+    public Customer findCustomerById(int customerId) {
+        return customerDAO.findCustomerById(customerId);
+    }
 }
